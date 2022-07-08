@@ -46,4 +46,7 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+# Extras
 /windows
+/server/node_modules
+/server/.env
