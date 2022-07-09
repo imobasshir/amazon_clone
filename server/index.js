@@ -15,6 +15,7 @@ const DB =
     `mongodb+srv://${user}:${pass}@cluster0.ccoj6.mongodb.net/?retryWrites=true&w=majority`;
 
 // middleware
+app.use(express.json());
 app.use(authRouter);
 
 // connections
