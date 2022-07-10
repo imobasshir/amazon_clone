@@ -50,3 +50,4 @@ app.*.map.json
 /windows
 /server/node_modules
 /server/.env
+/lib/features/auth/services/secrets.json
