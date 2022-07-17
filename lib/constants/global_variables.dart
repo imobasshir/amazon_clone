@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-String? uri = dotenv.env['ip'];
+// ip-address of my machine
+String uri = dotenv.get('ip');
 
 class GlobalVariables {
   // COLORS
