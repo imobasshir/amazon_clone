@@ -1,29 +1,7 @@
-import 'package:amazon_clone/features/auth/services/secrets.dart';
 import 'package:flutter/material.dart';
-import 'dart:async' show Future;
-import 'dart:convert' show json;
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-class SecretLoader {
-  final String secretPath;
-
-  SecretLoader({
-    required this.secretPath,
-  });
-  Future<Secrets> load() {
-    return rootBundle.loadStructuredData<Secrets>(
-      secretPath,
-      (jsonStr) async {
-        final secret = Secrets.fromJson(json.decode(jsonStr));
-        return secret;
-      },
-    );
-  }
-}
-
-Future<Secrets> secret = SecretLoader(secretPath: "secrets.json").load();
-
-String uri = 'http://$secret:3000';
+String? uri = dotenv.env['ip'];
 
 class GlobalVariables {
   // COLORS
