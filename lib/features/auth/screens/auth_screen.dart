@@ -117,7 +117,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         CustomTextField(
                           controller: _passwordController,
                           hintText: 'Password',
-                          type: TextInputType.none,
+                          type: TextInputType.name,
                           ans: true,
                         ),
                         const SizedBox(
@@ -176,7 +176,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         CustomTextField(
                           controller: _passwordController,
                           hintText: 'Password',
-                          type: TextInputType.none,
+                          type: TextInputType.name,
                           ans: true,
                         ),
                         const SizedBox(
