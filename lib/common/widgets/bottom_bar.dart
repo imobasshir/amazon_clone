@@ -1,4 +1,5 @@
 import 'package:amazon_clone/constants/global_variables.dart';
+import 'package:amazon_clone/features/accounts/screens/account_screen.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 
@@ -19,9 +20,7 @@ class _BottomBarState extends State<BottomBar> {
     const Center(
       child: Text('home'),
     ),
-    const Center(
-      child: Text('account'),
-    ),
+    const AccountScreen(),
     const Center(
       child: Text('cart'),
     ),
