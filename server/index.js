@@ -12,7 +12,7 @@ const app = express();
 const pass = process.env.pass;
 const user = process.env.user;
 const DB =
-    `mongodb+srv://${user}:${pass}@cluster0.ccoj6.mongodb.net/?retryWrites=true&w=majority`;
+    `mongodb+srv://${user}:${pass}@cluster0.uaffnz1.mongodb.net/?retryWrites=true&w=majority`
 
 // middleware
 app.use(express.json());
