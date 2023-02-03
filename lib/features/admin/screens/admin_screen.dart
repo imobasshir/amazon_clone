@@ -60,6 +60,12 @@ class _AdminScreenState extends State<AdminScreen> {
                   color: Colors.black,
                 ),
               ),
+              IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/auth-screen');
+                },
+                icon: const Icon(Icons.logout),
+              ),
             ],
           ),
         ),

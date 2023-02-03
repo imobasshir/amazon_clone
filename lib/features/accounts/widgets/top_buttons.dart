@@ -30,7 +30,9 @@ class _TopButtonsState extends State<TopButtons> {
           children: [
             AccountButton(
               text: 'Log Out',
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, '/auth-screen');
+              },
             ),
             AccountButton(
               text: 'Wish List',

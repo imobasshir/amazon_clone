@@ -101,11 +101,16 @@ class _DealOfDayState extends State<DealOfDay> {
         Container(
           padding: const EdgeInsets.only(left: 15, bottom: 15, top: 15),
           alignment: Alignment.topLeft,
-          child: Text(
-            'See all deal',
-            style: TextStyle(
-              color: Colors.cyan[800],
-              fontSize: 18,
+          child: TextButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/see_all_deal');
+            },
+            child: Text(
+              'See all deal',
+              style: TextStyle(
+                color: Colors.cyan[800],
+                fontSize: 18,
+              ),
             ),
           ),
         ),

@@ -8,7 +8,7 @@ const auth = require("../middleware/auth");
 // SIGNUP API
 authRouter.post("/api/signup", async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, type } = req.body;
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -25,6 +25,7 @@ authRouter.post("/api/signup", async (req, res) => {
       email,
       password: hashedPassword,
       name,
+      type,
     });
     user = await user.save();
     res.json(user);
@@ -74,7 +75,7 @@ authRouter.post("/tokenIsValid", async (req, res) => {
 // GET USER DATA
 authRouter.get('/', auth, async (req, res) => {
   const user = await User.findById(req.user);
-  res.json({...user._doc, token: req.token});
+  res.json({ ...user._doc, token: req.token });
 });
 
 module.exports = authRouter;

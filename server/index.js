@@ -12,7 +12,7 @@ const app = express();
 const pass = process.env.pass;
 const user = process.env.user;
 const DB =
-    `mongodb+srv://${user}:${pass}@cluster0.uaffnz1.mongodb.net/?retryWrites=true&w=majority`
+    'mongodb://localhost:27017/amazon_clone'
 
 // middleware
 app.use(express.json());
