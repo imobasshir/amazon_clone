@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.amazon_clone">
+    package="io.github.imobasshiramazon_clone">
    <application
         android:label="amazon_clone"
         android:name="${applicationName}"
