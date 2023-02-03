@@ -52,3 +52,4 @@ app.*.map.json
 /server/.env
 /lib/features/auth/services/secrets.json
 /.env
+/server/uploads

@@ -5,6 +5,9 @@ require("dotenv").config();
 
 // importing files
 const authRouter = require("./routes/auth");
+const router = require("./routes/sell");
+const adminRouter = require("./routes/admin");
+// const productRouter = require("./routes/product");
 
 // initialization
 const PORT = 3000;
@@ -17,8 +20,12 @@ const DB =
 // middleware
 app.use(express.json());
 app.use(authRouter);
+app.use(router);
+app.use(adminRouter);
+// app.use(productRouter);
 
 // connections
+mongoose.set('strictQuery', true);
 mongoose
     .connect(DB)
     .then(() => {
