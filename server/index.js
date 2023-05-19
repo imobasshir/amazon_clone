@@ -2,12 +2,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
+const adminRouter = require("./routes/admin");
 
 // importing files
 const authRouter = require("./routes/auth");
-const router = require("./routes/sell");
-const adminRouter = require("./routes/admin");
-// const productRouter = require("./routes/product");
+const productRouter = require("./routes/product");
+const userRouter = require("./routes/user");
 
 // initialization
 const PORT = 3000;
@@ -15,14 +15,13 @@ const app = express();
 const pass = process.env.pass;
 const user = process.env.user;
 const DB =
-    'mongodb://localhost:27017/amazon_clone'
-
+    `mongodb+srv://${user}:${pass}@cluster0.uaffnz1.mongodb.net/?retryWrites=true&w=majority`
 // middleware
 app.use(express.json());
 app.use(authRouter);
-app.use(router);
 app.use(adminRouter);
-// app.use(productRouter);
+app.use(productRouter);
+app.use(userRouter);
 
 // connections
 mongoose.set('strictQuery', true);

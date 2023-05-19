@@ -1,8 +1,11 @@
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:amazon_clone/features/accounts/screens/account_screen.dart';
+import 'package:amazon_clone/features/cart/screens/cart_screen.dart';
 import 'package:amazon_clone/features/home/screens/home_screen.dart';
+import 'package:amazon_clone/providers/user_provider.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BottomBar extends StatefulWidget {
   static const String routeName = '/actual-home';
@@ -14,20 +17,13 @@ class BottomBar extends StatefulWidget {
 
 class _BottomBarState extends State<BottomBar> {
   int _page = 0;
-  final double bottomBarwidth = 42;
-  final double bottomBarBorderwidth = 5;
+  double bottomBarWidth = 42;
+  double bottomBarBorderWidth = 5;
 
   List<Widget> pages = [
-    const Center(
-      child: HomeScreen(),
-    ),
+    const HomeScreen(),
     const AccountScreen(),
-    const Center(
-      child: Text('cart'),
-    ),
-    const Center(
-      child: Text('more'),
-    ),
+    const CartScreen(),
   ];
 
   void updatePage(int page) {
@@ -38,10 +34,11 @@ class _BottomBarState extends State<BottomBar> {
 
   @override
   Widget build(BuildContext context) {
+    final userCartLen = context.watch<UserProvider>().user.cart.length;
+
     return Scaffold(
       body: pages[_page],
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
         currentIndex: _page,
         selectedItemColor: GlobalVariables.selectedNavBarColor,
         unselectedItemColor: GlobalVariables.unselectedNavBarColor,
@@ -49,16 +46,17 @@ class _BottomBarState extends State<BottomBar> {
         iconSize: 28,
         onTap: updatePage,
         items: [
+          // HOME
           BottomNavigationBarItem(
             icon: Container(
-              width: _page == 0 ? bottomBarwidth : 0,
+              width: _page == 0 ? bottomBarWidth : 0,
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
                     color: _page == 0
                         ? GlobalVariables.selectedNavBarColor
-                        : GlobalVariables.unselectedNavBarColor,
-                    width: bottomBarBorderwidth,
+                        : GlobalVariables.backgroundColor,
+                    width: bottomBarBorderWidth,
                   ),
                 ),
               ),
@@ -68,16 +66,17 @@ class _BottomBarState extends State<BottomBar> {
             ),
             label: '',
           ),
+          // ACCOUNT
           BottomNavigationBarItem(
             icon: Container(
-              width: _page == 1 ? bottomBarwidth : 0,
+              width: _page == 1 ? bottomBarWidth : 0,
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
                     color: _page == 1
                         ? GlobalVariables.selectedNavBarColor
-                        : GlobalVariables.unselectedNavBarColor,
-                    width: bottomBarBorderwidth,
+                        : GlobalVariables.backgroundColor,
+                    width: bottomBarBorderWidth,
                   ),
                 ),
               ),
@@ -87,26 +86,27 @@ class _BottomBarState extends State<BottomBar> {
             ),
             label: '',
           ),
+          // CART
           BottomNavigationBarItem(
             icon: Container(
-              width: _page == 2 ? bottomBarwidth : 0,
+              width: _page == 2 ? bottomBarWidth : 0,
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
                     color: _page == 2
                         ? GlobalVariables.selectedNavBarColor
-                        : GlobalVariables.unselectedNavBarColor,
-                    width: bottomBarBorderwidth,
+                        : GlobalVariables.backgroundColor,
+                    width: bottomBarBorderWidth,
                   ),
                 ),
               ),
-              child: const badges.Badge(
-                badgeContent: Text('2'),
-                badgeStyle: badges.BadgeStyle(
+              child: badges.Badge(
+                badgeContent: Text(userCartLen.toString()),
+                badgeStyle: const badges.BadgeStyle(
                   badgeColor: Colors.white,
                   elevation: 0,
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.shopping_cart_outlined,
                 ),
               ),
@@ -115,14 +115,14 @@ class _BottomBarState extends State<BottomBar> {
           ),
           BottomNavigationBarItem(
             icon: Container(
-              width: _page == 3 ? bottomBarwidth : 0,
+              width: _page == 3 ? bottomBarWidth : 0,
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
                     color: _page == 3
                         ? GlobalVariables.selectedNavBarColor
-                        : GlobalVariables.unselectedNavBarColor,
-                    width: bottomBarBorderwidth,
+                        : GlobalVariables.backgroundColor,
+                    width: bottomBarBorderWidth,
                   ),
                 ),
               ),

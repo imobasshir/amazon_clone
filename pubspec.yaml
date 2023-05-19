@@ -37,7 +37,10 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_dotenv: ^5.0.2
+  flutter_rating_bar: ^4.0.0
   http: ^0.13.4
+  intl: ^0.18.0
+  pay: ^1.1.1
   provider: ^6.0.3
   shared_preferences: ^2.0.15
 
@@ -59,6 +62,8 @@ flutter:
     - lib/features/auth/services/secrets.json
     - .env
     - assets/images/
+    - assets/applepay.json
+    - assets/gpay.json
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

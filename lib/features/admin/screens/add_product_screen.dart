@@ -6,51 +6,51 @@ import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:amazon_clone/constants/utils.dart';
 import 'package:amazon_clone/features/admin/services/admin_services.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter/material.dart';
 
 class AddProductScreen extends StatefulWidget {
   static const String routeName = '/add-product';
-  const AddProductScreen({super.key});
+  const AddProductScreen({Key? key}) : super(key: key);
 
   @override
   State<AddProductScreen> createState() => _AddProductScreenState();
 }
 
 class _AddProductScreenState extends State<AddProductScreen> {
-  final TextEditingController productController = TextEditingController();
-  final TextEditingController descreptionController = TextEditingController();
+  final TextEditingController productNameController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController quantityController = TextEditingController();
   final AdminServices adminServices = AdminServices();
-
-  @override
-  void dispose() {
-    productController.dispose();
-    descreptionController.dispose();
-    priceController.dispose();
-    quantityController.dispose();
-    super.dispose();
-  }
 
   String category = 'Mobiles';
   List<File> images = [];
   final _addProductFormKey = GlobalKey<FormState>();
 
-  List<String> productCatogeries = [
+  @override
+  void dispose() {
+    super.dispose();
+    productNameController.dispose();
+    descriptionController.dispose();
+    priceController.dispose();
+    quantityController.dispose();
+  }
+
+  List<String> productCategories = [
     'Mobiles',
     'Essentials',
     'Appliances',
-    'Fashion',
     'Books',
+    'Fashion'
   ];
 
   void sellProduct() {
     if (_addProductFormKey.currentState!.validate() && images.isNotEmpty) {
       adminServices.sellProduct(
         context: context,
-        productName: productController.text,
-        description: descreptionController.text,
+        name: productNameController.text,
+        description: descriptionController.text,
         price: double.parse(priceController.text),
         quantity: double.parse(quantityController.text),
         category: category,
@@ -77,22 +77,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
               gradient: GlobalVariables.appBarGradient,
             ),
           ),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Add Product',
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
-              IconButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/auth-screen');
-                },
-                icon: const Icon(Icons.logout),
-              ),
-            ],
+          title: const Text(
+            'Add Product',
+            style: TextStyle(
+              color: Colors.black,
+            ),
           ),
         ),
       ),
@@ -119,7 +108,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         ).toList(),
                         options: CarouselOptions(
                           viewportFraction: 1,
-                          height: 150,
+                          height: 200,
                         ),
                       )
                     : GestureDetector(
@@ -129,11 +118,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           radius: const Radius.circular(10),
                           dashPattern: const [10, 4],
                           strokeCap: StrokeCap.round,
-                          strokeWidth: 2,
-                          color: Colors.black45,
                           child: Container(
-                            height: 150,
                             width: double.infinity,
+                            height: 150,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                             ),
@@ -146,11 +133,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                 ),
                                 const SizedBox(height: 15),
                                 Text(
-                                  'Select Product Image',
+                                  'Select Product Images',
                                   style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 15,
                                     color: Colors.grey.shade400,
-                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ],
@@ -160,48 +146,48 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       ),
                 const SizedBox(height: 30),
                 CustomTextField(
-                  controller: productController,
+                  controller: productNameController,
                   hintText: 'Product Name',
-                  type: TextInputType.none,
                   ans: false,
+                  type: TextInputType.name,
                 ),
                 const SizedBox(height: 10),
                 CustomTextField(
-                  controller: descreptionController,
+                  controller: descriptionController,
                   hintText: 'Description',
-                  type: TextInputType.none,
                   maxLines: 7,
                   ans: false,
+                  type: TextInputType.multiline,
                 ),
                 const SizedBox(height: 10),
                 CustomTextField(
                   controller: priceController,
                   hintText: 'Price',
-                  type: TextInputType.number,
                   ans: false,
+                  type: TextInputType.number,
                 ),
                 const SizedBox(height: 10),
                 CustomTextField(
                   controller: quantityController,
-                  hintText: 'Quntity',
-                  type: TextInputType.number,
+                  hintText: 'Quantity',
                   ans: false,
+                  type: TextInputType.number,
                 ),
                 const SizedBox(height: 10),
                 SizedBox(
                   width: double.infinity,
                   child: DropdownButton(
                     value: category,
-                    icon: const Icon(Icons.arrow_drop_down),
-                    items: productCatogeries.map((String value) {
+                    icon: const Icon(Icons.keyboard_arrow_down),
+                    items: productCategories.map((String item) {
                       return DropdownMenuItem(
-                        value: value,
-                        child: Text(value),
+                        value: item,
+                        child: Text(item),
                       );
                     }).toList(),
-                    onChanged: (String? newValue) {
+                    onChanged: (String? newVal) {
                       setState(() {
-                        category = newValue!;
+                        category = newVal!;
                       });
                     },
                   ),
@@ -211,7 +197,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   text: 'Sell',
                   onTap: sellProduct,
                 ),
-                const SizedBox(height: 20),
               ],
             ),
           ),

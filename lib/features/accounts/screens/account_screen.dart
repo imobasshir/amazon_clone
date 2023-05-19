@@ -9,13 +9,13 @@ class AccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const PreferredSize(
+    return const Scaffold(
+      appBar: PreferredSize(
         preferredSize: Size.fromHeight(50),
         child: AppBarAcc(),
         ),
       body: Column(
-        children: const [
+        children: [
           BelowAppBar(),
           SizedBox(height: 10),
           TopButtons(),
