@@ -1,5 +1,6 @@
 import 'package:amazon_clone/features/accounts/services/account_services.dart';
 import 'package:amazon_clone/features/accounts/widgets/account_button.dart';
+import 'package:amazon_clone/features/order_details/screens/order_user_screen.dart';
 import 'package:flutter/material.dart';
 
 class TopButtons extends StatefulWidget {
@@ -18,7 +19,13 @@ class _TopButtonsState extends State<TopButtons> {
           children: [
             AccountButton(
               text: 'Your Orders',
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const OrderUserScreen(),
+                  ),
+                );
+              },
             ),
             AccountButton(
               text: 'Turn Seller',

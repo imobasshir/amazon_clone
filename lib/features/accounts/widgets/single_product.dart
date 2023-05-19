@@ -21,12 +21,12 @@ class SingleProduct extends StatelessWidget {
           color: Colors.white,
         ),
         child: Container(
-          width: 180,
+          width: 160,
           padding: const EdgeInsets.all(10),
           child: Image.network(
             image,
-            fit: BoxFit.fitHeight,
-            width: 180,
+            fit: BoxFit.cover,
+            width: 160,
           ),
         ),
       ),

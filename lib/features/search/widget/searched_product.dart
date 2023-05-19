@@ -30,33 +30,26 @@ class SearchedProduct extends StatelessWidget {
               Image.network(
                 product.images[0],
                 fit: BoxFit.contain,
-                height: 135,
-                width: 135,
+                height: 106,
+                width: 106,
               ),
-              Column(
-                children: [
-                  Container(
-                    width: 235,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(
+              Padding(
+                padding: const EdgeInsets.only(left: 4.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
                       product.name,
                       style: const TextStyle(
                         fontSize: 16,
                       ),
                       maxLines: 2,
                     ),
-                  ),
-                  Container(
-                    width: 235,
-                    padding: const EdgeInsets.only(left: 10, top: 5),
-                    child: Stars(
+                    Stars(
                       rating: avgRating,
                     ),
-                  ),
-                  Container(
-                    width: 235,
-                    padding: const EdgeInsets.only(left: 10, top: 5),
-                    child: Text(
+                    Text(
                       '\$${product.price}',
                       style: const TextStyle(
                         fontSize: 20,
@@ -64,24 +57,16 @@ class SearchedProduct extends StatelessWidget {
                       ),
                       maxLines: 2,
                     ),
-                  ),
-                  Container(
-                    width: 235,
-                    padding: const EdgeInsets.only(left: 10),
-                    child: const Text('Eligible for FREE Shipping'),
-                  ),
-                  Container(
-                    width: 235,
-                    padding: const EdgeInsets.only(left: 10, top: 5),
-                    child: const Text(
+                    const Text('Eligible for FREE Shipping'),
+                    const Text(
                       'In Stock',
                       style: TextStyle(
                         color: Colors.teal,
                       ),
                       maxLines: 2,
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),

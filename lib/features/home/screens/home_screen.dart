@@ -1,6 +1,5 @@
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:amazon_clone/features/home/widgets/address_box.dart';
-import 'package:amazon_clone/features/home/widgets/app_bar_home.dart';
 import 'package:amazon_clone/features/home/widgets/crousel_image.dart';
 import 'package:amazon_clone/features/home/widgets/deal_of_a_day.dart';
 import 'package:amazon_clone/features/home/widgets/top_cateogeries.dart';

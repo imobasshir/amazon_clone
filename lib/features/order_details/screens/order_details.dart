@@ -1,6 +1,7 @@
 import 'package:amazon_clone/common/widgets/custom_button.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:amazon_clone/features/admin/services/admin_services.dart';
+import 'package:amazon_clone/features/product_details/screens/product_details_screen.dart';
 import 'package:amazon_clone/features/search/screens/search_screen.dart';
 import 'package:amazon_clone/models/order.dart';
 import 'package:amazon_clone/providers/user_provider.dart';
@@ -42,7 +43,11 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
       order: widget.order,
       onSucess: () {
         setState(() {
-          currentStep += 1;
+          // if (currentStep < 3) {
+            currentStep += 1;
+          // } else {
+          //   currentStep = 0;
+          // }
         });
       },
     );
@@ -151,7 +156,8 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                   children: [
                     Text('Order Date:      ${DateFormat().format(
                       DateTime.fromMillisecondsSinceEpoch(
-                          widget.order.orderedAt),
+                        widget.order.orderedAt,
+                      ),
                     )}'),
                     Text('Order ID:          ${widget.order.id}'),
                     Text('Order Total:      \$${widget.order.totalPrice}'),
@@ -176,34 +182,44 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     for (int i = 0; i < widget.order.products.length; i++)
-                      Row(
-                        children: [
-                          Image.network(
-                            widget.order.products[i].images[0],
-                            height: 120,
-                            width: 120,
-                          ),
-                          const SizedBox(width: 5),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  widget.order.products[i].name,
-                                  style: const TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                Text(
-                                  'Qty: ${widget.order.quantity[i]}',
-                                ),
-                              ],
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            ProductDetailScreen.routeName,
+                            arguments: widget.order.products[i],
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            Image.network(
+                              widget.order.products[i].images[0],
+                              height: 106,
+                              width: 106,
+                              fit: BoxFit.cover,
                             ),
-                          ),
-                        ],
+                            const SizedBox(width: 5),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    widget.order.products[i].name,
+                                    style: const TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  Text(
+                                    'Qty: ${widget.order.quantity[i]}',
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                   ],
                 ),
@@ -226,10 +242,13 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                   currentStep: currentStep,
                   controlsBuilder: (context, details) {
                     if (user.type == 'admin') {
-                      return CustomButton(
-                        text: 'Done',
-                        onTap: () => changeOrderStatus(details.currentStep),
-                      );
+                      return currentStep >= 3
+                          ? const SizedBox()
+                          : CustomButton(
+                              text: 'Done',
+                              onTap: () =>
+                                  changeOrderStatus(details.currentStep),
+                            );
                     }
                     return const SizedBox();
                   },

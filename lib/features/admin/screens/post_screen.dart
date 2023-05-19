@@ -2,6 +2,7 @@ import 'package:amazon_clone/common/widgets/loader.dart';
 import 'package:amazon_clone/features/accounts/widgets/single_product.dart';
 import 'package:amazon_clone/features/admin/screens/add_product_screen.dart';
 import 'package:amazon_clone/features/admin/services/admin_services.dart';
+import 'package:amazon_clone/features/product_details/screens/product_details_screen.dart';
 import 'package:amazon_clone/models/product.dart';
 import 'package:flutter/material.dart';
 
@@ -51,7 +52,7 @@ class _PostsScreenState extends State<PostsScreen> {
               itemCount: products!.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 0.7,
+                childAspectRatio: 0.8,
               ),
               itemBuilder: (context, index) {
                 final productData = products![index];
@@ -59,18 +60,39 @@ class _PostsScreenState extends State<PostsScreen> {
                   children: [
                     SizedBox(
                       height: 140,
-                      child: SingleProduct(
-                        image: productData.images[0],
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            ProductDetailScreen.routeName,
+                            arguments: productData,
+                          );
+                        },
+                        child: SingleProduct(
+                          image: productData.images[0],
+                        ),
                       ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Expanded(
-                          child: Text(
-                            productData.name,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 14.0),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  ProductDetailScreen.routeName,
+                                  arguments: productData,
+                                );
+                              },
+                              child: Text(
+                                productData.name,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                              ),
+                            ),
                           ),
                         ),
                         IconButton(
