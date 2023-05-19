@@ -58,9 +58,11 @@ class SearchedProduct extends StatelessWidget {
                       maxLines: 2,
                     ),
                     const Text('Eligible for FREE Shipping'),
-                    const Text(
-                      'In Stock',
-                      style: TextStyle(
+                    Text(
+                      product.quantity == 0
+                          ? 'Currently unavailable.'
+                          : 'In Stock.',
+                      style: const TextStyle(
                         color: Colors.teal,
                       ),
                       maxLines: 2,

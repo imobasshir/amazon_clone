@@ -85,6 +85,14 @@ class _CartProductState extends State<CartProduct> {
                         ),
                         maxLines: 2,
                       ),
+                    ] else ...[
+                      const Text(
+                        'Out of Stock',
+                        style: TextStyle(
+                          color: Colors.red,
+                        ),
+                        maxLines: 2,
+                      ),
                     ],
                   ],
                 ),
