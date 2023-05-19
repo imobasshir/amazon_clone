@@ -30,6 +30,8 @@ dependencies:
   badges: ^3.0.2
   carousel_slider: ^4.1.1
   cloudinary_public: ^0.11.0
+  community_charts_common: ^1.0.1
+  community_charts_flutter: ^1.0.1
   cupertino_icons: ^1.0.2
   dotenv: ^4.0.1
   dotted_border: ^2.0.0+3

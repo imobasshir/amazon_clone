@@ -1,3 +1,4 @@
+import 'package:amazon_clone/common/widgets/custom_button.dart';
 import 'package:amazon_clone/constants/utils.dart';
 import 'package:amazon_clone/features/address/services/address_services.dart';
 import 'package:flutter/material.dart';
@@ -67,6 +68,21 @@ class _AddressScreenState extends State<AddressScreen> {
   }
 
   void onGooglePayResult(res) {
+    if (Provider.of<UserProvider>(context, listen: false)
+        .user
+        .address
+        .isEmpty) {
+      addressServices.saveUserAddress(
+          context: context, address: addressToBeUsed);
+    }
+    addressServices.placeOrder(
+      context: context,
+      address: addressToBeUsed,
+      totalSum: double.parse(widget.totalAmount),
+    );
+  }
+
+  void onCashPay(res) {
     if (Provider.of<UserProvider>(context, listen: false)
         .user
         .address
@@ -188,6 +204,15 @@ class _AddressScreenState extends State<AddressScreen> {
                   ],
                 ),
               ),
+              
+              CustomButton(
+                text: 'Pay Cash',
+                onTap: () {
+                  payPressed(address);
+                  onCashPay(true);
+                },
+              ),
+              const SizedBox(height: 10),
               ApplePayButton(
                 width: double.infinity,
                 style: ApplePayButtonStyle.whiteOutline,

@@ -51,27 +51,24 @@ class _CartProductState extends State<CartProduct> {
             children: [
               Image.network(
                 product.images[0],
-                fit: BoxFit.contain,
-                height: 135,
-                width: 135,
+                fit: BoxFit.cover,
+                height: 106,
+                width: 106,
               ),
-              Column(
-                children: [
-                  Container(
-                    width: 235,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
                       product.name,
                       style: const TextStyle(
                         fontSize: 16,
                       ),
                       maxLines: 2,
                     ),
-                  ),
-                  Container(
-                    width: 235,
-                    padding: const EdgeInsets.only(left: 10, top: 5),
-                    child: Text(
+                    Text(
                       '\$${product.price}',
                       style: const TextStyle(
                         fontSize: 20,
@@ -79,24 +76,18 @@ class _CartProductState extends State<CartProduct> {
                       ),
                       maxLines: 2,
                     ),
-                  ),
-                  Container(
-                    width: 235,
-                    padding: const EdgeInsets.only(left: 10),
-                    child: const Text('Eligible for FREE Shipping'),
-                  ),
-                  Container(
-                    width: 235,
-                    padding: const EdgeInsets.only(left: 10, top: 5),
-                    child: const Text(
-                      'In Stock',
-                      style: TextStyle(
-                        color: Colors.teal,
+                    const Text('Eligible for FREE Shipping'),
+                    if (product.quantity > 0) ...[
+                      const Text(
+                        'In Stock',
+                        style: TextStyle(
+                          color: Colors.teal,
+                        ),
+                        maxLines: 2,
                       ),
-                      maxLines: 2,
-                    ),
-                  ),
-                ],
+                    ],
+                  ],
+                ),
               ),
             ],
           ),

@@ -55,7 +55,7 @@ class _MyAppState extends State<MyApp> {
             color: Colors.black,
           ),
         ),
-        useMaterial3: true, // can remove this line
+        // useMaterial3: true, // can remove this line
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
       home: Provider.of<UserProvider>(context).user.token.isNotEmpty

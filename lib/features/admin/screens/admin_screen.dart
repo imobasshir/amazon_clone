@@ -1,6 +1,8 @@
 import 'package:amazon_clone/constants/global_variables.dart';
-import 'package:amazon_clone/features/admin/screens/product_screen.dart';
-import 'package:amazon_clone/features/admin/widgets/admin_appbar.dart';
+import 'package:amazon_clone/features/accounts/services/account_services.dart';
+import 'package:amazon_clone/features/admin/screens/analtyics_screen.dart';
+import 'package:amazon_clone/features/admin/screens/post_screen.dart';
+import 'package:amazon_clone/features/admin/screens/order_screen.dart';
 import 'package:flutter/material.dart';
 
 class AdminScreen extends StatefulWidget {
@@ -12,17 +14,13 @@ class AdminScreen extends StatefulWidget {
 
 class _AdminScreenState extends State<AdminScreen> {
   int _page = 0;
-  final double bottomBarwidth = 42;
-  final double bottomBarBorderwidth = 5;
+  double bottomBarWidth = 42;
+  double bottomBarBorderWidth = 5;
 
   List<Widget> pages = [
-    const ProductScreen(),
-    const Center(
-      child: Text('Analytics Page'),
-    ),
-    const Center(
-      child: Text('Orders Page'),
-    ),
+    const PostsScreen(),
+    const AnalyticsScreen(),
+    const OrdersScreen(),
   ];
 
   void updatePage(int page) {
@@ -34,13 +32,45 @@ class _AdminScreenState extends State<AdminScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(50),
-        child: AdminAppBar(),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(50),
+        child: AppBar(
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              gradient: GlobalVariables.appBarGradient,
+            ),
+          ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                alignment: Alignment.topLeft,
+                child: Image.asset(
+                  'assets/images/amazon_in.png',
+                  width: 120,
+                  height: 45,
+                  color: Colors.black,
+                ),
+              ),
+              const Text(
+                'Admin',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            ],
+          ),
+          actions: [
+            IconButton(
+              onPressed: () => AccountServices().logOut(context),
+              icon: const Icon(Icons.logout),
+            ),
+          ],
+        ),
       ),
       body: pages[_page],
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
         currentIndex: _page,
         selectedItemColor: GlobalVariables.selectedNavBarColor,
         unselectedItemColor: GlobalVariables.unselectedNavBarColor,
@@ -48,35 +78,37 @@ class _AdminScreenState extends State<AdminScreen> {
         iconSize: 28,
         onTap: updatePage,
         items: [
+          // POSTS
           BottomNavigationBarItem(
             icon: Container(
-              width: _page == 0 ? bottomBarwidth : 0,
+              width: bottomBarWidth,
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
                     color: _page == 0
                         ? GlobalVariables.selectedNavBarColor
-                        : GlobalVariables.unselectedNavBarColor,
-                    width: bottomBarBorderwidth,
+                        : GlobalVariables.backgroundColor,
+                    width: bottomBarBorderWidth,
                   ),
                 ),
               ),
               child: const Icon(
-                Icons.post_add,
+                Icons.home_outlined,
               ),
             ),
             label: '',
           ),
+          // ANALYTICS
           BottomNavigationBarItem(
             icon: Container(
-              width: _page == 1 ? bottomBarwidth : 0,
+              width: bottomBarWidth,
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
                     color: _page == 1
                         ? GlobalVariables.selectedNavBarColor
-                        : GlobalVariables.unselectedNavBarColor,
-                    width: bottomBarBorderwidth,
+                        : GlobalVariables.backgroundColor,
+                    width: bottomBarBorderWidth,
                   ),
                 ),
               ),
@@ -86,16 +118,17 @@ class _AdminScreenState extends State<AdminScreen> {
             ),
             label: '',
           ),
+          // ORDERS
           BottomNavigationBarItem(
             icon: Container(
-              width: _page == 2 ? bottomBarwidth : 0,
+              width: bottomBarWidth,
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
                     color: _page == 2
                         ? GlobalVariables.selectedNavBarColor
-                        : GlobalVariables.unselectedNavBarColor,
-                    width: bottomBarBorderwidth,
+                        : GlobalVariables.backgroundColor,
+                    width: bottomBarBorderWidth,
                   ),
                 ),
               ),
