@@ -1,7 +1,6 @@
 # amazon_clone
 
-A new Flutter project.
-
+A full stack Amazon Clone
 
 ## 💻 Installation
 
