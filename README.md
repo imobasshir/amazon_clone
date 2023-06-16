@@ -1,6 +1,6 @@
 # amazon_clone
 
-A full stack Amazon Clone
+A full stack Amazon Clone.
 
 ## 💻 Installation
 
